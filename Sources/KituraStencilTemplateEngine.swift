@@ -24,6 +24,6 @@ public class StencilTemplateEngine: TemplateEngine {
 
     public func render(filePath: String, context: [String: Any]) throws -> String {
         let template = try Template(path: Path(filePath))
-        return try template.render(context: Context(dictionary: context))
+        return try template.render(Context(dictionary: context))
     }
 }
