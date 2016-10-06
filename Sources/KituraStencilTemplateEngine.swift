@@ -23,7 +23,12 @@ public class StencilTemplateEngine: TemplateEngine {
     public init() {}
 
     public func render(filePath: String, context: [String: Any]) throws -> String {
-        let template = try Template(path: Path(filePath))
+        let templatePath = Path(filePath)
+        let templateDirectory = templatePath.parent()
+        let template = try Template(path: templatePath)
+        let loader = TemplateLoader(paths: [templateDirectory])
+        var context = context
+        context["loader"] = loader
         return try template.render(Context(dictionary: context))
     }
 }
