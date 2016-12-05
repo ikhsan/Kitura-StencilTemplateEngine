@@ -30,7 +30,7 @@ public class StencilTemplateEngine: TemplateEngine {
         let templatePath = Path(filePath)
         let templateDirectory = templatePath.parent()
         let template = try Template(path: templatePath)
-        let loader = TemplateLoader(paths: [templateDirectory])
+        let loader = FileSystemLoader(paths: [templateDirectory])
         var context = context
         context["loader"] = loader
         return try template.render(Context(dictionary: context, namespace: namespace))
