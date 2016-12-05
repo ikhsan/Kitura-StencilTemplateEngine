@@ -20,7 +20,11 @@ import PathKit
 
 public class StencilTemplateEngine: TemplateEngine {
     public var fileExtension: String { return "stencil" }
-    public init() {}
+    private let namespace: Namespace
+
+    public init(namespace: Namespace = Namespace()) {
+        self.namespace = namespace
+    }
 
     public func render(filePath: String, context: [String: Any]) throws -> String {
         let templatePath = Path(filePath)
@@ -29,6 +33,6 @@ public class StencilTemplateEngine: TemplateEngine {
         let loader = TemplateLoader(paths: [templateDirectory])
         var context = context
         context["loader"] = loader
-        return try template.render(Context(dictionary: context))
+        return try template.render(Context(dictionary: context, namespace: namespace))
     }
 }
